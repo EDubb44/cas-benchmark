@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Advisory Services (CAS) Trends: 2018-2024</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Infographic Narrative Plan:
+        1. Hero: CAS as a Growth Engine.
+        2. CAS Revenue as % of Total Firm Revenue.
+        3. NCF Evolution (All & Top Performers).
+        4. NCFPP Evolution (All & Top Performers).
+        5. Client Portfolio Scaling: Median Number of CAS Clients.
+        6. Strategic Evolution: Foundational Shifts (Fixed-Fee Billing & Dedicated Staffing Trends).
+        7. Client Profile Evolution: Median Annual Revenue of CAS Clients.
+        8. Service Model Maturation (Pricing - 2024 Snapshot Donut, Higher-Value Services Flow).
+        9. Staffing Dynamics (Dedicated Staff - 2024 Snapshot Donut, Talent Development List).
+    -->
+    <!-- Visualization Choices:
+        - Hero: Single Big Number (HTML/Tailwind).
+        - CAS Revenue as % of Total Firm Revenue: Line Chart (Chart.js).
+        - NCF Evolution: Multi-series Line Chart (Chart.js).
+        - NCFPP Evolution: Multi-series Line Chart (Chart.js).
+        - Median Number of CAS Clients: Grouped Bar Chart (Chart.js).
+        - Fixed-Fee Billing Adoption Trend: Multi-series Line Chart (Chart.js).
+        - Dedicated CAS Staffing Trend: Multi-series Line Chart (Chart.js).
+        - Median Annual Revenue of CAS Clients: Grouped Bar Chart (Chart.js).
+        - Pricing Evolution (2024 Snapshot): Donut Chart (Chart.js).
+        - Higher-Value Services: HTML/CSS Flow Diagram (Tailwind).
+        - Dedicated Staff (2024 Snapshot): Donut Chart (Chart.js).
+        - Talent Development: HTML/CSS List with Unicode Icons (Tailwind).
+        - All charts use Chart.js rendering to Canvas. NO SVG, NO MERMAID JS.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F0EA; /* Light Beige page background */
+            color: #2B343B; /* Dark Charcoal default text */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .material-card {
+            background-color: #FFFFFF; /* White card background */
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); 
+            padding: 1.5rem; 
+            margin-bottom: 1.5rem; 
+        }
+        .stat-number {
+            font-size: 3rem; 
+            font-weight: 700; 
+            color: #FF6135; /* Vibrant Orange for standout numbers */
+        }
+        .section-title {
+            font-size: 1.875rem; 
+            font-weight: 600; 
+            color: #2B343B; /* Dark Charcoal for section titles */
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .chart-title {
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            color: #00B9EB; /* Bright Blue for chart titles */
+            margin-bottom: 0.75rem; 
+        }
+        .explanatory-text {
+            font-size: 0.875rem; 
+            color: #4A5568; /* A slightly lighter charcoal/gray for readability */
+            margin-bottom: 1rem; 
+            line-height: 1.6;
+        }
+        .flow-step {
+            background-color: #E0F7FA; /* Lighter shade of Bright Blue */
+            border: 1px solid #00B9EB; /* Bright Blue border */
+            color: #2B343B; 
+        }
+        .flow-arrow {
+            color: #00B9EB; /* Bright Blue */
+        }
+        .icon-list-item span, .future-driver-icon {
+            color: #00B9EB; /* Bright Blue for icons */
+        }
+        .future-driver-card {
+            background-color: #FFFFFF; /* White card */
+        }
+        .future-driver-title {
+            color: #FF6135; /* Vibrant Orange for these titles */
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="text-slate-800">
+
+    <header class="bg-[#2B343B] text-[#FFFFFF] py-8 shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold">Client Advisory Services (CAS)</h1>
+            <p class="text-xl mt-2 text-[#F3F0EA]">A Deep Dive into Industry Trends & Market Performance (2018-2024)</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="hero" class="material-card text-center">
+            <h2 class="section-title">CAS: The Undisputed Growth Engine</h2>
+            <p class="explanatory-text max-w-3xl mx-auto">Client Advisory Services (CAS) has unequivocally established itself as a primary driver of expansion within the accounting profession. The consistent, robust growth observed over the years underscores a fundamental market shift towards proactive, data-driven financial guidance.</p>
+            <div class="my-6">
+                <p class="text-slate-600 text-2xl">Median CAS Practice Growth (All Respondents, 2024)</p>
+                <p class="stat-number">17%</p>
+            </div>
+            <p class="explanatory-text max-w-3xl mx-auto">This figure highlights the vitality and expanding demand for CAS, positioning it as a critical component for future-proofing accounting firms and ensuring their continued relevance and expansion.</p>
+        </section>
+
+        <section id="cas-revenue-contribution" class="material-card">
+            <h2 class="section-title">Growing Contribution: CAS Revenue as % of Total Firm Revenue</h2>
+            <p class="explanatory-text">This chart illustrates the increasing proportion of total firm revenue derived from Client Advisory Services for All Respondents. The upward trend signifies the growing strategic importance and financial contribution of CAS within accounting firms, moving from a smaller service line to a more substantial part of the overall business.</p>
+            <div class="chart-container max-w-3xl mx-auto h-80 sm:h-96">
+                <canvas id="casRevenuePercentageChart"></canvas>
+            </div>
+            <p class="explanatory-text mt-4">The steady rise in CAS as a percentage of total firm revenue underscores its evolution into a key revenue stream. This reflects successful practice development, increasing client adoption of CAS, and a strategic focus by firms on expanding these higher-value advisory offerings.</p>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <section id="ncf-evolution" class="material-card">
+                <h2 class="section-title text-2xl mb-4">Skyrocketing Financial Performance</h2>
+                 <h3 class="chart-title">Median Net Client Fees (NCF) Evolution</h3>
+                <p class="explanatory-text">Median Net Client Fees (NCF) for CAS practices have shown substantial growth, reflecting expanding market demand and increasing practice scale. Both "All Respondents" and "Top Performers" demonstrate a strong upward trajectory.</p>
+                <div class="chart-container max-w-xl mx-auto h-80 sm:h-96">
+                    <canvas id="ncfEvolutionChart"></canvas>
+                </div>
+                <p class="explanatory-text mt-4">The robust NCF figures, particularly in recent years, suggest CAS practices are successfully attracting larger clients or expanding service scopes, solidifying CAS as a core business unit.</p>
+            </section>
+
+            <section id="ncfpp-evolution" class="material-card">
+                <h2 class="section-title text-2xl mb-4">Boosting Efficiency & Value</h2>
+                <h3 class="chart-title">Median Net Client Fees Per Professional (NCFPP)</h3>
+                <p class="explanatory-text">NCFPP, a critical indicator of productivity and profitability, has steadily increased. This highlights enhanced operational leverage and a strategic shift towards delivering higher-value services that command premium fees.</p>
+                <div class="chart-container max-w-xl mx-auto h-80 sm:h-96">
+                    <canvas id="ncfppEvolutionChart"></canvas>
+                </div>
+                <p class="explanatory-text mt-4">Growth in NCFPP is driven by technology adoption, process standardization, staff upskilling, and evolving pricing strategies, all contributing to greater efficiency and value delivery.</p>
+            </section>
+        </div>
+
+        <section id="client-portfolio-scale" class="material-card">
+            <h2 class="section-title">Scaling Operations: Growth in CAS Client Base</h2>
+            <h3 class="chart-title">Median Number of CAS Clients Served</h3>
+            <p class="explanatory-text">The capacity to serve a growing number of clients is a key indicator of CAS practice scalability and market penetration. This chart shows the evolution of the median number of CAS clients served per firm, for both All Respondents and Top Performers, highlighting the expansion of client portfolios over time.</p>
+            <div class="chart-container max-w-3xl mx-auto h-80 sm:h-96">
+                <canvas id="medianCasClientsChart"></canvas>
+            </div>
+            <p class="explanatory-text mt-4">The consistent increase in the median number of CAS clients, particularly the jump seen in 2024, reflects firms' enhanced ability to manage larger client loads. This is likely due to improved processes, technology adoption, and effective team structures. Top Performers consistently manage a larger client base, underscoring their operational maturity and efficiency in service delivery.</p>
+        </section>
+
+        <section id="strategic-evolution-trends" class="material-card">
+            <h2 class="section-title">Strategic Evolution: Foundational Shifts in CAS Practice Management</h2>
+            <p class="explanatory-text">The CAS Benchmark Surveys reveal significant maturation in how firms approach CAS. Two key indicators of this strategic evolution are the shift in pricing methodologies towards value-based models and the increasing commitment to specialized teams. These trends highlight a move towards more sustainable, profitable, and expert-driven CAS practices.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div>
+                    <h3 class="chart-title text-center">Trend Towards Value: Adoption of Fixed-Fee Billing</h3>
+                    <div class="chart-container max-w-lg mx-auto h-72 sm:h-80">
+                        <canvas id="fixedFeeAdoptionChart"></canvas>
+                    </div>
+                    <p class="explanatory-text mt-2 text-center">This chart tracks the percentage of firms whose primary CAS billing method is "Fixed Fee/Recurring," indicating a move away from traditional hourly billing towards more predictable and value-aligned pricing.</p>
+                </div>
+                <div>
+                    <h3 class="chart-title text-center">Focus on Expertise: Trend in Dedicated CAS Staffing</h3>
+                    <div class="chart-container max-w-lg mx-auto h-72 sm:h-80">
+                        <canvas id="dedicatedStaffingTrendChart"></canvas>
+                    </div>
+                    <p class="explanatory-text mt-2 text-center">This chart shows the percentage of firms reporting staff dedicated exclusively to CAS, a crucial element for developing deep expertise and efficient service delivery.</p>
+                </div>
+            </div>
+            <p class="explanatory-text mt-4">The increasing adoption of fixed-fee, recurring billing models demonstrates a growing understanding of value-based pricing and the desire for more predictable revenue streams in CAS. Similarly, the rise in dedicated CAS staffing underscores the recognition that specialized knowledge and focused teams are essential for delivering high-quality advisory services and achieving operational excellence. These foundational shifts are critical enablers of the sustained growth and profitability observed in the CAS sector.</p>
+        </section>
+        
+        <section id="client-revenue-scale" class="material-card">
+            <h2 class="section-title">Moving Upmarket: Serving Larger, More Complex Clients</h2>
+            <h3 class="chart-title">Median Annual Revenue of CAS Clients</h3>
+            <p class="explanatory-text">A significant trend in CAS evolution is the increasing size of clients served, as indicated by their median annual revenue. This shift suggests CAS practices are developing the capabilities to handle more complex engagements and are increasingly trusted by larger businesses for strategic financial guidance.</p>
+            <div class="chart-container max-w-3xl mx-auto h-80 sm:h-96">
+                <canvas id="medianClientRevenueChart"></canvas>
+            </div>
+            <p class="explanatory-text mt-4">The steady rise in the median revenue of CAS clients, especially for Top Performers, signifies a move towards higher-value engagements. Serving larger clients often translates to more sophisticated advisory needs, greater fee potential, and deeper, more strategic client relationships. This trend reflects the growing maturity and expertise within CAS practices.</p>
+        </section>
+
+        <section id="service-model-maturation" class="material-card">
+            <h2 class="section-title">Maturing Service Models: The Shift in Strategy</h2>
+            <p class="explanatory-text">The CAS service model has significantly matured, characterized by a move towards more sophisticated offerings, strategic pricing, and robust operational structures, reflecting an evolution from compliance support to strategic advisory. The donut chart below shows a snapshot of pricing methods in 2024, while the flow illustrates the typical evolution of service offerings.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6 items-center">
+                <div>
+                    <h3 class="chart-title">Primary Pricing Method (Snapshot 2024)</h3>
+                    <div class="chart-container max-w-xs mx-auto h-64 sm:h-72">
+                        <canvas id="pricingEvolutionChart"></canvas>
+                    </div>
+                    <p class="explanatory-text mt-2 text-center">The 2024 data confirms a strong preference for Fixed Fee/Recurring billing (77% All Respondents, 86% Top Performers), signaling a mature approach to value demonstration.</p>
+                </div>
+                <div>
+                    <h3 class="chart-title">Towards Higher-Value Services</h3>
+                    <p class="explanatory-text">CAS is evolving from foundational services to comprehensive, strategic financial partnerships.</p>
+                    <div class="space-y-3 mt-4">
+                        <div class="flow-step p-3 rounded-md text-sm shadow">Basic Bookkeeping & Compliance Support</div>
+                        <div class="text-center flow-arrow text-2xl font-semibold">➔</div>
+                        <div class="flow-step p-3 rounded-md text-sm shadow">CFO/Controller Advisory Services</div>
+                        <div class="text-center flow-arrow text-2xl font-semibold">➔</div>
+                        <div class="flow-step p-3 rounded-md text-sm shadow">Business Insights & Analytics CAS</div>
+                        <div class="text-center flow-arrow text-2xl font-semibold">➔</div>
+                        <div class="flow-step p-3 rounded-md text-sm shadow">Fully Outsourced Finance Department</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="staffing-dynamics" class="material-card">
+            <h2 class="section-title">Building Winning Teams: Staffing Dynamics</h2>
+            <p class="explanatory-text">Effectively staffing CAS practices is critical and involves dedicated teams, strategic upskilling, and adapting to talent market realities. The focus is on specialized professionals with a blend of technical, technological, and advisory skills. The donut chart shows the 2024 commitment to dedicated staff.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6 items-start">
+                <div>
+                    <h3 class="chart-title">Firms Committed to Dedicated CAS Staff (2024)</h3>
+                    <div class="chart-container max-w-xs mx-auto h-64 sm:h-72">
+                        <canvas id="dedicatedStaffChart"></canvas>
+                    </div>
+                    <p class="explanatory-text mt-2 text-center">In 2024, 78% of practices agree/strongly agree their firm is committed to dedicated CAS staffing, a key indicator of practice maturity.</p>
+                </div>
+                <div>
+                    <h3 class="chart-title">Key Talent Development Strategies</h3>
+                    <p class="explanatory-text">Firms are investing in their talent to meet the evolving demands of CAS clients.</p>
+                    <ul class="space-y-3 mt-4 icon-list-item text-slate-700">
+                        <li class="flex items-center"><span class="text-2xl mr-3">🧠</span> Continuous Upskilling & CPE</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3">🧑‍💼</span> Developing CFO-Level Competencies</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3">💡</span> Fostering Business Insight Capabilities</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3">🧩</span> Considering Non-Traditional Hires</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3">🌍</span> Embracing Remote/Hybrid Talent</li>
+                        <li class="flex items-center"><span class="text-2xl mr-3">🤝</span> Utilizing Outsourcing/Offshoring</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        </main>
+
+    <footer class="text-center py-8 bg-[#E5E7EB] text-[#4B5563] text-sm">
+        <p>Data derived from CPA.com & AICPA PCPS Client Advisory Services Benchmark Surveys (2018, 2020, 2022, 2024).</p>
+        <p>This infographic is for illustrative purposes and summarizes key trends.</p>
+        <p>&copy; 2024 CAS Insights Presentation. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const newPalette = {
+            white: '#FFFFFF',
+            darkCharcoal: '#2B343B',
+            vibrantOrange: '#FF6135',
+            lightBeige: '#F3F0EA',
+            brightBlue: '#00B9EB',
+            
+            fontColor: '#2B343B',
+            gridColor: 'rgba(43, 52, 59, 0.1)',
+            tooltipBackground: 'rgba(43, 52, 59, 0.9)',
+            primaryChartColor: '#00B9EB', // Bright Blue
+            secondaryChartColor: '#FF6135', // Vibrant Orange
+            tertiaryChartColor: '#4A5568' // A neutral gray for less emphasis if needed
+        };
+
+        function wrapLabels(label, maxWidth = 16) {
+            if (typeof label !== 'string' || label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            if (currentLine.trim().length > 0) {
+                lines.push(currentLine.trim());
+            }
+            return lines.length > 0 ? lines : [label];
+        }
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        },
+                        label: function(context) { 
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                const chartId = context.chart.canvas.id;
+                                if (chartId === 'fixedFeeAdoptionChart' || chartId === 'dedicatedStaffingTrendChart' || chartId === 'casRevenuePercentageChart') {
+                                    label += context.parsed.y + '%';
+                                } else if (chartId === 'medianCasClientsChart') {
+                                    label += context.parsed.y + ' clients';
+                                } else { // Assumed currency for others
+                                     if (context.parsed.y >= 1000000) label += '$' + (context.parsed.y / 1000000).toFixed(1) + 'M';
+                                     else if (context.parsed.y >= 1000) label += '$' + (context.parsed.y / 1000).toFixed(0) + 'K';
+                                     else label += '$' + context.parsed.y;
+                                }
+                            }
+                            return label;
+                        }
+                    },
+                    backgroundColor: newPalette.tooltipBackground,
+                    titleColor: newPalette.white,
+                    bodyColor: newPalette.white,
+                    borderColor: newPalette.brightBlue,
+                    borderWidth: 1,
+                    padding: 10,
+                    cornerRadius: 4,
+                },
+                legend: {
+                    labels: {
+                        color: newPalette.fontColor,
+                         font: {
+                            size: 12,
+                            family: 'Inter, sans-serif'
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { 
+                        color: newPalette.fontColor,
+                        font: {
+                            size: 11,
+                            family: 'Inter, sans-serif'
+                        },
+                        callback: function(value, index, values) {
+                            const chartId = this.chart.canvas.id;
+                            if (chartId === 'fixedFeeAdoptionChart' || chartId === 'dedicatedStaffingTrendChart' || chartId === 'casRevenuePercentageChart') {
+                                return value + '%';
+                            }
+                            if (chartId === 'medianCasClientsChart') {
+                                return value; // Raw number for clients
+                            }
+                            if (value >= 1000000) return '$' + (value / 1000000).toFixed(1) + 'M';
+                            if (value >= 1000) return '$' + (value / 1000).toFixed(0) + 'K';
+                            return '$' + value;
+                        }
+                    },
+                    grid: { color: newPalette.gridColor }
+                },
+                x: {
+                    ticks: { 
+                        color: newPalette.fontColor,
+                        font: {
+                            size: 11,
+                            family: 'Inter, sans-serif'
+                        }
+                    },
+                    grid: { color: newPalette.gridColor }
+                }
+            }
+        };
+        
+        const commonPieDonutOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: { 
+                     callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed !== null) {
+                                label += context.parsed + '%';
+                            }
+                            return label;
+                        }
+                    },
+                    backgroundColor: newPalette.tooltipBackground,
+                    titleColor: newPalette.white,
+                    bodyColor: newPalette.white,
+                    borderColor: newPalette.brightBlue,
+                    borderWidth: 1,
+                    padding: 10,
+                    cornerRadius: 4,
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: newPalette.fontColor,
+                        font: {
+                            size: 12,
+                            family: 'Inter, sans-serif'
+                        },
+                         boxWidth: 15,
+                         padding: 15
+                    }
+                }
+            }
+        };
+
+        const casRevenuePercentageCtx = document.getElementById('casRevenuePercentageChart').getContext('2d');
+        new Chart(casRevenuePercentageCtx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2020', '2022', '2024'], 
+                datasets: [
+                    {
+                        label: 'CAS Revenue as % of Total Firm Revenue (All Respondents)',
+                        data: [5, 7, 8, 10], 
+                        borderColor: newPalette.primaryChartColor, 
+                        backgroundColor: 'rgba(0, 185, 235, 0.1)', 
+                        fill: true,
+                        tension: 0.1,
+                        pointBackgroundColor: newPalette.primaryChartColor,
+                        pointBorderColor: newPalette.white,
+                        pointHoverBackgroundColor: newPalette.white,
+                        pointHoverBorderColor: newPalette.primaryChartColor,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }
+                ]
+            },
+            options: { 
+                ...commonChartOptions, 
+                scales: {
+                    ...commonChartOptions.scales, 
+                    y: {
+                        ...commonChartOptions.scales.y, 
+                        min: 0,
+                        max: 15, 
+                        ticks: {
+                            ...commonChartOptions.scales.y.ticks, 
+                            stepSize: 5
+                        }
+                    }
+                }
+            }
+        });
+
+        const ncfEvolutionCtx = document.getElementById('ncfEvolutionChart').getContext('2d');
+        new Chart(ncfEvolutionCtx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2020', '2022', '2024'],
+                datasets: [
+                    {
+                        label: 'NCF All Respondents',
+                        data: [895000, 1123257, 1000000, 1606409],
+                        borderColor: newPalette.primaryChartColor, 
+                        backgroundColor: 'rgba(0, 185, 235, 0.1)', 
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'NCF Top Performers',
+                        data: [1625000, 2280000, 2067113, 2959383],
+                        borderColor: newPalette.secondaryChartColor, 
+                        backgroundColor: 'rgba(255, 97, 53, 0.1)', 
+                        fill: true,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: commonChartOptions
+        });
+
+        const ncfppEvolutionCtx = document.getElementById('ncfppEvolutionChart').getContext('2d');
+        new Chart(ncfppEvolutionCtx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2020', '2022', '2024'],
+                datasets: [
+                    {
+                        label: 'NCFPP All Respondents',
+                        data: [94118, 112293, 121454, 156250],
+                        borderColor: newPalette.primaryChartColor, 
+                        backgroundColor: 'rgba(0, 185, 235, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'NCFPP Top Performers',
+                        data: [180000, 185000, 231217, 248646],
+                        borderColor: newPalette.secondaryChartColor, 
+                        backgroundColor: 'rgba(255, 97, 53, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: commonChartOptions
+        });
+
+        const medianCasClientsCtx = document.getElementById('medianCasClientsChart').getContext('2d');
+        new Chart(medianCasClientsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['', '2018', '2020', '2022', '2024', ''],
+                datasets: [
+                    {
+                        label: 'All Respondents',
+                        data: [null, 50, 75, 75, 100, null],
+                        backgroundColor: newPalette.primaryChartColor, 
+                        borderWidth: 0,
+                        minBarLength: 2, 
+                        barPercentage: 0.8, // Updated
+                        categoryPercentage: 0.9 // Updated
+                    },
+                    {
+                        label: 'Top Performers',
+                        data: [null, 75, 100, 100, 125, null],
+                        backgroundColor: newPalette.secondaryChartColor, 
+                        borderWidth: 0,
+                        minBarLength: 2,
+                        barPercentage: 0.8, // Updated
+                        categoryPercentage: 0.9 // Updated
+                    }
+                ]
+            },
+             options: { 
+                ...commonChartOptions, 
+                scales: {
+                    ...commonChartOptions.scales, 
+                    y: {
+                        ...commonChartOptions.scales.y, 
+                        max: 150, 
+                        ticks: {
+                            ...commonChartOptions.scales.y.ticks, 
+                            stepSize: 25
+                        }
+                    }
+                }
+            }
+        });
+
+        const fixedFeeAdoptionCtx = document.getElementById('fixedFeeAdoptionChart').getContext('2d');
+        new Chart(fixedFeeAdoptionCtx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2020', '2022', '2024'],
+                datasets: [
+                    {
+                        label: 'All Respondents',
+                        data: [50, 62, 71, 77],
+                        borderColor: newPalette.primaryChartColor,
+                        backgroundColor: 'rgba(0, 185, 235, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Top Performers',
+                        data: [56, 73, 80, 86],
+                        borderColor: newPalette.secondaryChartColor,
+                        backgroundColor: 'rgba(255, 97, 53, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    ...commonChartOptions.scales,
+                    y: {
+                        ...commonChartOptions.scales.y,
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                            ...commonChartOptions.scales.y.ticks,
+                            stepSize: 20,
+                        }
+                    }
+                }
+            }
+        });
+
+        const dedicatedStaffingTrendCtx = document.getElementById('dedicatedStaffingTrendChart').getContext('2d');
+        new Chart(dedicatedStaffingTrendCtx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2020', '2022', '2024'],
+                datasets: [
+                    {
+                        label: 'All Respondents (% Yes)',
+                        data: [38, 43, 63, 65],
+                        borderColor: newPalette.primaryChartColor,
+                        backgroundColor: 'rgba(0, 185, 235, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Top Performers (% Yes)',
+                        data: [44, 56, 78, 76],
+                        borderColor: newPalette.secondaryChartColor,
+                        backgroundColor: 'rgba(255, 97, 53, 0.1)',
+                        fill: true,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                ...commonChartOptions,
+                scales: {
+                    ...commonChartOptions.scales,
+                    y: {
+                        ...commonChartOptions.scales.y,
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                            ...commonChartOptions.scales.y.ticks,
+                            stepSize: 20,
+                        }
+                    }
+                }
+            }
+        });
+
+        const medianClientRevenueCtx = document.getElementById('medianClientRevenueChart').getContext('2d');
+        new Chart(medianClientRevenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['', '2018', '2020', '2022', '2024', ''],
+                datasets: [
+                    {
+                        label: 'All Respondents',
+                        data: [null, 750000, 1000000, 1500000, 2000000, null],
+                        backgroundColor: newPalette.primaryChartColor,
+                        borderWidth: 0,
+                        minBarLength: 2,
+                        barPercentage: 0.8, // Updated
+                        categoryPercentage: 0.9 // Updated
+                    },
+                    {
+                        label: 'Top Performers',
+                        data: [null, 1500000, 2000000, 2500000, 3000000, null],
+                        backgroundColor: newPalette.secondaryChartColor,
+                        borderWidth: 0,
+                        minBarLength: 2,
+                        barPercentage: 0.8, // Updated
+                        categoryPercentage: 0.9 // Updated
+                    }
+                ]
+            },
+            options: {
+                ...commonChartOptions,
+                 scales: {
+                    ...commonChartOptions.scales, 
+                    y: {
+                        ...commonChartOptions.scales.y, 
+                        max: 3500000, 
+                        ticks: {
+                            ...commonChartOptions.scales.y.ticks, 
+                            stepSize: 500000
+                        }
+                    }
+                }
+            }
+        });
+
+        const pricingEvolutionCtx = document.getElementById('pricingEvolutionChart').getContext('2d');
+        new Chart(pricingEvolutionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [wrapLabels('Fixed Fee/Recurring (All)'), wrapLabels('Other (All)')],
+                datasets: [{
+                    label: 'Primary Pricing Method (2024 - All Respondents)',
+                    data: [77, 23], 
+                    backgroundColor: [newPalette.primaryChartColor, newPalette.tertiaryChartColor], 
+                    borderColor: [newPalette.darkCharcoal, newPalette.darkCharcoal],
+                    borderWidth: 1
+                }]
+            },
+            options: commonPieDonutOptions
+        });
+        
+        const dedicatedStaffChartCtx = document.getElementById('dedicatedStaffChart').getContext('2d');
+        new Chart(dedicatedStaffChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [wrapLabels('Committed to Dedicated Staff'), wrapLabels('Not Committed / Other')],
+                datasets: [{
+                    label: 'Commitment to Dedicated Staff (2024)',
+                    data: [78, 22], 
+                    backgroundColor: [newPalette.primaryChartColor, newPalette.tertiaryChartColor], 
+                    borderColor: [newPalette.darkCharcoal, newPalette.darkCharcoal],
+                    borderWidth: 1
+                }]
+            },
+            options: commonPieDonutOptions
+        });
+
+    </script>
+</body>
+</html>
